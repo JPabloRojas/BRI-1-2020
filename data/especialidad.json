@@ -1,0 +1,22 @@
+[
+    {
+        "especialidad": "general",
+        "keywords": ["dolor cabeza", "dolor garganta", "dolor estomago", "fiebre", "dolor"]
+    },
+    {
+        "especialidad": "respiratorio",
+        "keywords": ["garganta", "dolor pecho", "respiracion", "tos"]
+    },
+    {
+        "especialidad": "cardiaco",
+        "keywords": ["pecho", "palpitacion", "cansancio", "inestabilidad", "dolor cabeza", "debilidad muscular"]
+    },
+    {
+        "especialidad": "diabetes",
+        "keywords": ["glicemia", "azucar", "vision borrosa", "diabetes", ]
+    },
+    {
+        "especialidad": "nutricion",
+        "keywords": ["obesidad", "sobrepeso"]
+    }
+]
