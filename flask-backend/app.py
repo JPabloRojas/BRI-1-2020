@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from demo import querys
+from symptoms import symptoms
 from elastic.elastic import *
 
 app = Flask(__name__)
@@ -13,6 +13,10 @@ def sendQuery():
     for hit in response:
         return_response.append(hit['info'].to_dict())
     return jsonify(return_response)
+
+@app.route('/symptoms')
+def getSymptoms():
+    return jsonify(symptoms)
 
 if __name__ == '__main__':
     app.run(debug=True)# tambien se puede indicar el port
