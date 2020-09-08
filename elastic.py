@@ -2,7 +2,7 @@ import operator
 from functools import reduce
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, connections
-from elasticsearch_dsl.query import MultiMatch
+from elasticsearch_dsl.query import MultiMatch, Q, Script, FunctionScore
 
 class ESConnection:
     # De especialización
@@ -23,6 +23,13 @@ class ESConnection:
         
         q = reduce(operator.or_, or_queries)
         s.query = q
+
+        script = {
+            'script': { 
+                'source': "_score * sigmoid(2.74, 1, Math.sqrt(doc['info.opinion_stats.positive'].value) - doc['info.opinion_stats.negative'].value) * (doc['info.opinion_stats.positive'].value + 1) / (doc['info.opinion_stats.total'].value + 1)" 
+            }
+        }
+        s.query = FunctionScore(query=q, script_score=script)
 
         return s.execute()
 
