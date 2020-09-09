@@ -2,7 +2,7 @@
 // @ts-nocheck
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/order */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -144,7 +144,7 @@ const Body = props => {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [step, setStep] = useState(0);
 
-  useState(() => {
+  useEffect(() => {
     actions.getSymptoms();
   }, []);
 
