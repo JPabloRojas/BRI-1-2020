@@ -30,6 +30,7 @@ const initialState = {
     loadingResults: false,
   },
   symptoms: [],
+  results: [],
 };
 
 const body = createReducer(initialState, {
@@ -47,6 +48,7 @@ const body = createReducer(initialState, {
   },
   [BODY.GET_RESULTS_SUCCESS](state, action) {
     state.controls.loadingResults = false;
+    state.results = action.results;
   },
 });
 

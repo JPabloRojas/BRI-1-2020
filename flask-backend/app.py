@@ -11,7 +11,8 @@ def sendQuery():
     response = elastic_class_connection.search_keywords(parse_query)
     return_response = []
     for hit in response:
-        return_response.append(hit['info'].to_dict())
+        print(hit)
+        return_response.append((hit).to_dict())
     return jsonify(return_response)
 
 @app.route('/symptoms')
