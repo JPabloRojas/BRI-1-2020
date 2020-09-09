@@ -21,7 +21,7 @@ const NavBar = props => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          App
+          Sintomatic
         </Typography>
       </Toolbar>
     </AppBar>

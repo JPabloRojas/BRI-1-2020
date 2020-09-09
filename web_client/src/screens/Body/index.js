@@ -7,6 +7,17 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Grid from '@material-ui/core/Grid';
+import HomeIcon from '@material-ui/icons/Home';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import RoomIcon from '@material-ui/icons/Room';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+
+import Logo from "../../commons/assets/cough.png";
+import Edad from "../edad";
+import Gender from "../gender";
 
 // Project
 import { selectState, actionProps } from 'utils/reduxActions';
@@ -74,8 +85,23 @@ const SelectorMenu = props => (
 );
 
 const WelcomeStep = props => (
-  <Grid container spacing={3} className={props.classes.container}>
-    BIENVENIDAAAAA
+  <Grid container justify="center" spacing={3} className={props.classes.container}>
+    <Grid item xs={12} >
+      
+      <Typography style={{textAlign: "center", fontSize: 28, fontWeight:500, fontStyle:"italic"}}>
+          Sintomatic
+      </Typography>
+        
+    </Grid>
+    <img src={Logo} alt="logo" className="rounded mx-auto d-block" style={{ height: "150px"}}/>  
+    <Grid item xs={12} >
+      
+      <Typography style={{textAlign: "center", fontSize: 20, fontWeight:300, fontStyle:"italic"}}>
+          Identifiquemos juntos el especilista indicado para ti
+      </Typography>
+        
+    </Grid>
+
     <Button color='primary' variant='contained' className={props.classes.nextButton} onClick={() => props.setStep(1)}>
       Comenzar
     </Button>
@@ -83,10 +109,60 @@ const WelcomeStep = props => (
 );
 
 const InitialInformationStep = props => (
-  <Grid container spacing={3} className={props.classes.container}>
-    <Grid item xs={6}>
-      Formulariooooooo
+  <Grid container className={props.classes.container}>
+    <Grid item xs={12}>
+        <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic"}}>
+            ¡Conozcamonos un poco!
+        </Typography>
+
+        <Grid container xs={12} md={12}
+            direction="row"
+            alignItems="center"
+            style={{ marginTop: "20px"}}
+            spacing={1}>
+            <Grid item xs={4} lg={4} style={{maxHeight: '100%'}}>
+            <Edad></Edad> 
+            </Grid>
+            <Grid item xs={4} lg={2} style={{maxHeight: '100%'}}>
+            <Gender></Gender>
+            </Grid>
+            <Grid item xs={4} lg={4} style={{maxHeight: '100%'}}>
+                <FormControl style={{width:"95%"}}>
+                  <InputLabel htmlFor="input-with-icon-adornment">Ubicación</InputLabel>
+                  <Input
+                    id="ubication"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <RoomIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+            </Grid>
+            <Grid item xs={4} lg={2} style={{maxHeight: '100%'}}>
+              <FormControl>
+                <InputLabel htmlFor="input-with-icon-adornment">Número</InputLabel>
+                <Input
+                  id="door"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MeetingRoomIcon />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
+        </Grid>
+        
+        
+
     </Grid>
+
+
+    <Button color='primary' variant='contained' className={props.classes.home} onClick={() => props.setStep(0)}>
+      <HomeIcon></HomeIcon>
+    </Button>
+
     <Button
       color='primary'
       variant='contained'
@@ -115,6 +191,11 @@ const BodyStep = props => (
         </Grid>
       </Grid>
     </Grid>
+
+    <Button color='primary' variant='contained' className={props.classes.home} onClick={() => props.setStep(0)}>
+      <HomeIcon></HomeIcon>
+    </Button>
+
     <Button color='primary' variant='contained' className={props.classes.nextButton} onClick={props.saveSymptoms}>
       Siguiente
     </Button>
@@ -132,6 +213,11 @@ const ResultsStep = props => {
 const DetailStep = props => (
   <Grid container spacing={3} className={props.classes.container}>
     <Grid item xs={6}></Grid>
+
+    <Button color='primary' variant='contained' className={props.classes.home} onClick={() => props.setStep(0)}>
+      <HomeIcon></HomeIcon>
+    </Button>
+
     <Button color='primary' variant='contained' className={props.classes.nextButton} onClick={() => props.setStep(4)}>
       Siguiente
     </Button>
@@ -191,7 +277,7 @@ const Body = props => {
           <Card style={{ position: 'relative', minHeight: '50vh' }}>
             {step === 0 && <WelcomeStep classes={props.classes} setStep={setStep} />}
             {step === 1 && (
-              <InitialInformationStep classes={props.classes} saveInitialInformation={saveInitialInformation} />
+              <InitialInformationStep classes={props.classes} saveInitialInformation={saveInitialInformation} setStep={setStep}/>
             )}
             {step === 2 && (
               <BodyStep
@@ -201,10 +287,11 @@ const Body = props => {
                 onClickPart={onClickPart}
                 controls={controls}
                 classes={props.classes}
+                setStep={setStep}
               />
             )}
             {step === 3 && <DetailStep classes={props.classes} setStep={setStep} />}
-            {step === 4 && <ResultsStep classes={props.classes} />}
+            {step === 4 && <ResultsStep classes={props.classes} setStep={setStep} />}
           </Card>
 
           {/* STEPS */}
