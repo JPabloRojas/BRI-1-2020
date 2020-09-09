@@ -285,7 +285,7 @@ const DetailStep = props => (
               width={100}
             />
           </Grid>
-          <Grid item xs={1} style={{ textAlign: 'center' }}>
+          <Grid item xs={1} style={{ textAlign: 'right' }}>
             <img src={Sad} alt='logo' className='rounded mx-auto d-block' style={{ height: '50px' }} />
           </Grid>
         </Grid>
@@ -304,12 +304,15 @@ const DetailStep = props => (
 
 const ResultsStep = props => {
   return (
-    <Grid container spacing={3} className={props.classes.container}>
+    <Grid container spacing={3} className={props.classes.container} style={{marginBottom:30}}>
       <Grid item xs={12}>
         <Typography style={{ textAlign: 'center', fontSize: 28, fontWeight: 500, fontStyle: 'italic' }}>
           Tenemos los especialistas para ti!
         </Typography>
       </Grid>
+      <Button color='primary' variant='contained' className={props.classes.home} onClick={() => props.setStep(0)}>
+        <HomeIcon></HomeIcon>
+      </Button>
       <Grid item xs={12}>
         <List>
           {props.results
