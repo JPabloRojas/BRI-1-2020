@@ -2,6 +2,7 @@ symptoms = [
     {"head": ["dolor de cabeza", "jaqueca", "nauseas", "vomitos", "convulsiones"]},
     {"eyes": ["derrame", "vision nublada", "dolor de ojo", "fatiga visual", "punzadas"]},
     {"ears": ["dolor de oido", "perdida de audicion", "infeccion"]},
+    {"nose": ["resfriado", "congestion nasal", "mucosidad"]},
     {"oralCavity": ["ulcera", "ulcera bucal", "ulcera", "afta", "fuego"]},
     {"neck": ["dolor de cuello", "dolor muscular", "rigidez", "punzadas", "dolor al tragar"]},
     {"chest": ["falta de aire", "dolor de pectoral", "presion"]},
@@ -14,6 +15,6 @@ symptoms = [
     {"sexualOrgans": ["picazon", "infeccion", "granos", "hinchazon"]},
     {"thighs": ["inflamacion", "color rojizo", "color morado"]},
     {"knees": ["dolor de articulacion", "inflamacion"]},
-    {"loweLeg": ["inflamacion", "color morado"]},
+    {"lowerLeg": ["inflamacion", "color morado"]},
     {"foot": ["dolor de empeine", "dolor de talon", "dificultad para apoyar el pie"]}
 ]
