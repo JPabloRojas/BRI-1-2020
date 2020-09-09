@@ -121,11 +121,13 @@ const BodyStep = props => (
   </Grid>
 );
 
-const ResultsStep = props => (
-  <Grid container spacing={3} className={props.classes.container}>
-    <Grid item xs={6}></Grid>
-  </Grid>
-);
+const ResultsStep = props => {
+  return (
+    <Grid container spacing={3} className={props.classes.container}>
+      <Grid item xs={12}></Grid>
+    </Grid>
+  );
+};
 
 const DetailStep = props => (
   <Grid container spacing={3} className={props.classes.container}>
@@ -147,6 +149,12 @@ const Body = props => {
   useEffect(() => {
     actions.getSymptoms();
   }, []);
+
+  useEffect(() => {
+    if (step === 4) {
+      actions.getResults(selectedSymptoms.join(' '));
+    }
+  }, [step]);
 
   const onClickPart = e => {
     setMenuOpen(true);

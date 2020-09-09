@@ -18,6 +18,21 @@ function* getSymptoms() {
   });
 }
 
+function* getResults() {
+  yield takeLatest(BODY.GET_RESULTS, function* (action) {
+    const response = yield apiRequest(`/query`, {
+      method: 'post',
+      body: JSON.stringify({
+        query: action.symptoms,
+      }),
+    });
+    if (response) {
+      yield put(bodyActions.getResultsSuccess(response));
+    }
+  });
+}
+
 export default function* saga() {
   yield spawn(getSymptoms);
+  yield spawn(getResults);
 }
