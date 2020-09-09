@@ -120,10 +120,10 @@ const InitialInformationStep = props => (
             alignItems="center"
             style={{ marginTop: "20px"}}
             spacing={1}>
-            <Grid item xs={4} lg={4} style={{maxHeight: '100%'}}>
+            <Grid item xs={3} lg={4} style={{maxHeight: '100%'}}>
             <Edad></Edad> 
             </Grid>
-            <Grid item xs={4} lg={2} style={{maxHeight: '100%'}}>
+            <Grid item xs={3} lg={2} style={{maxHeight: '100%'}}>
             <Gender></Gender>
             </Grid>
             <Grid item xs={4} lg={4} style={{maxHeight: '100%'}}>
@@ -139,7 +139,7 @@ const InitialInformationStep = props => (
                   />
                 </FormControl>
             </Grid>
-            <Grid item xs={4} lg={2} style={{maxHeight: '100%'}}>
+            <Grid item xs={2} lg={2} style={{maxHeight: '100%'}}>
               <FormControl>
                 <InputLabel htmlFor="input-with-icon-adornment">Número</InputLabel>
                 <Input
@@ -177,6 +177,12 @@ const InitialInformationStep = props => (
 const BodyStep = props => (
   <Grid container spacing={3} className={props.classes.container}>
     <Grid item xs={6}>
+      <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic", textAlign: "center"}}>
+          Identifiquemos tus síntomas
+      </Typography>
+    </Grid>
+    <Grid item xs={6}></Grid>
+    <Grid item xs={6}>
       <Male controls={props.controls} actions={props.actions} onClickPart={props.onClickPart} />
     </Grid>
     <Grid item xs={6}>
@@ -210,8 +216,11 @@ const ResultsStep = props => (
 
 const DetailStep = props => (
   <Grid container spacing={3} className={props.classes.container}>
-    <Grid item xs={6}></Grid>
-
+    <Grid item xs={6}>
+      <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic"}}>
+          ¿Cuál es la intensidad de tus síntomas?
+      </Typography>
+    </Grid>
     <Button color='primary' variant='contained' className={props.classes.home} onClick={() => props.setStep(0)}>
       <HomeIcon></HomeIcon>
     </Button>
