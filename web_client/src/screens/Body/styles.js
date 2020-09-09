@@ -7,6 +7,11 @@ const styles = theme => ({
     bottom: 30,
     right: 30,
   },
+  home: {
+    position: 'absolute',
+    bottom: 30,
+    left: 30,
+  },
 });
 
 export default styles;
