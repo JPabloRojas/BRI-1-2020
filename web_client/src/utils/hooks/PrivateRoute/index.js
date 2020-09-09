@@ -11,11 +11,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       component={props => (
-        truthty(localStorage.getItem('user'))
-          ? <Layout>
-              <Component {...props} context={ReactReduxContext}/>
-            </Layout>
-          : <Redirect to="/" />
+        <Layout>
+          <Component {...props} context={ReactReduxContext} />
+        </Layout>
       )}
     />
   );
