@@ -1,0 +1,75 @@
+{
+  "name": "web_client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.10.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.54",
+    "@sentry/react": "^5.20.0",
+    "camelcase-keys-deep": "^0.1.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "chart.js": "^2.9.3",
+    "classnames": "^2.2.6",
+    "file-saver": "^2.0.2",
+    "fontsource-roboto": "^2.1.3",
+    "immer": "^6.0.8",
+    "jszpl": "^1.0.5",
+    "localforage": "^1.7.3",
+    "model-environment": "^1.1.3",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
+    "react-dom": "^16.13.1",
+    "react-number-format": "^4.4.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
+    "react-virtualized": "^9.21.2",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.3",
+    "reselect": "^4.0.0",
+    "socket.io-client": "^2.3.0",
+    "xlsx": "^0.16.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "airbnb-base"
+    ],
+    "rules": {
+      "arrow-parens": [
+        2,
+        "as-needed"
+      ],
+      "implicit-arrow-linebreak": 0,
+      "operator-linebreak": 0
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-react-hooks": "^4.0.2"
+  },
+  "proxy": "http://127.0.0.1:5000"
+}

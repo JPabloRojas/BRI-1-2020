@@ -1,0 +1,46 @@
+
+@import './vars.scss';
+
+html,
+body {
+  margin: 0;
+  left: 0;
+  top: 0
+}
+
+hr {
+  border: 1px solid $light-grey;
+}
+
+
+.model-female-front{
+  // stroke: yellowgreen;
+  color: #1576d1;
+  fill: green
+}
+
+.model-male-front{
+  fill: green;
+}
+
+.body-head {
+  opacity: 0;
+}
+
+.body-area {
+  cursor: pointer;
+  opacity: 0;
+}
+
+.body-area:hover{
+  opacity: 0.5;
+}
+.body-area:focus{
+  opacity: 0.5;
+}
+.body-area:checked{
+  opacity: 0.5;
+}
+
+
+

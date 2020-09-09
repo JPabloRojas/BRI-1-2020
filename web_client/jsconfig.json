@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "target": "es6",
+    "checkJs": true,
+    "lib": [
+      "es6"
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "config/*": [
+        "config/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ],
+      "commons/*": [
+        "commons/*"
+      ],
+      "screens/*": [
+        "screens/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "public"
+  ]
+}
