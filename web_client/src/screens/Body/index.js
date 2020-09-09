@@ -14,8 +14,12 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import RoomIcon from '@material-ui/icons/Room';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Slider from '@material-ui/core/Slider';
 
 import Logo from "../../commons/assets/cough.png";
+import Happy from "../../commons/assets/emotion.png";
+import Sad from "../../commons/assets/hurt.png";
 import Edad from "../edad";
 import Gender from "../gender";
 
@@ -111,10 +115,18 @@ const WelcomeStep = props => (
 const InitialInformationStep = props => (
   <Grid container className={props.classes.container}>
     <Grid item xs={12}>
+      <Grid container xs={12} md={12}>
+        <Grid item xs={6} lg={6}>
+          <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic"}}>
+              ¡Conozcamonos un poco!
+          </Typography>
+        </Grid>
+        <Grid item xs={6} lg={6}>
         <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic"}}>
-            ¡Conozcamonos un poco!
+            ¿Por dónde buscamos al médico indicado?
         </Typography>
-
+        </Grid>
+      </Grid>
         <Grid container xs={12} md={12}
             direction="row"
             alignItems="center"
@@ -188,7 +200,26 @@ const BodyStep = props => (
     <Grid item xs={6}>
       <Grid container spacing={3} className={props.classes.container}>
         <Grid item xs={12}>
-          <TextField variant='outlined' label='Ingreses sus síntomas' />
+          <Autocomplete
+            id="tags-outlined"
+            options={props.symptoms}
+            getOptionLabel={(option) => option}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label="Busca tus síntomas"
+              />
+            )}
+          />
+          <Autocomplete
+            id="combo-box-demo"
+            options={props.symptoms}
+            getOptionLabel={(option) => option}
+            style={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Busca tus síntomas" variant="outlined" value=""/>}
+            onClick={(e) => props.setSelectedSymptoms([...props.selectedSymptoms, e.target.value])}
+          />
         </Grid>
         <Grid item xs={12}>
           {props.selectedSymptoms.map(item => (
@@ -202,7 +233,7 @@ const BodyStep = props => (
       <HomeIcon></HomeIcon>
     </Button>
 
-    <Button color='primary' variant='contained' className={props.classes.nextButton} onClick={props.saveSymptoms}>
+    <Button color='primary' variant='contained' className={props.classes.nextButton} onClick={props.saveSymptoms} disabled={props.selectedSymptoms.length === 0}>
       Siguiente
     </Button>
   </Grid>
@@ -214,13 +245,68 @@ const ResultsStep = props => (
   </Grid>
 );
 
+const marks = [
+  {
+    value: 1,
+    label: 'Sutil',
+  },
+  {
+    value: 2,
+    label: 'Leve',
+  },
+  {
+    value: 3,
+    label: 'Moderado',
+  },
+  {
+    value: 4,
+    label: 'Intenso',
+  },
+  {
+    value: 5,
+    label: 'Muy intenso',
+  },
+];
+
 const DetailStep = props => (
-  <Grid container spacing={3} className={props.classes.container}>
-    <Grid item xs={6}>
-      <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic"}}>
+  <Grid container spacing={3} className={props.classes.container} style={{marginBottom:30}}>
+    <Grid item xs={12}>
+      <Typography style={{fontSize: 26, fontWeight:400, fontStyle:"italic"}}>
           ¿Cuál es la intensidad de tus síntomas?
       </Typography>
+
+      {props.selectedSymptoms.map(item => 
+        <Grid container xs={12} style={{marginTop:20}}>
+          <Grid item xs={6} style={{fontStyle:"normal", fontSize:22, textAlign: "center", marginTop:10}}>
+            {item}
+          </Grid>
+          <Grid item xs={1} style={{textAlign: "center"}}>
+            <img src={Happy} alt="logo" className="rounded mx-auto d-block" style={{ height: "50px"}}/> 
+          </Grid>
+          <Grid item xs={4} style={{textAlign: "center", marginTop:10}}>
+           
+            <Slider
+              defaultValue={3}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              step={1}
+              marks={marks}
+              min={1}
+              max={5}
+              width={100}
+            />
+          </Grid>
+          <Grid item xs={1} style={{textAlign: "center"}}>
+            <img src={Sad} alt="logo" className="rounded mx-auto d-block" style={{ height: "50px"}}/> 
+          </Grid>
+
+        </Grid>)}
+
+      
+
     </Grid>
+
+
     <Button color='primary' variant='contained' className={props.classes.home} onClick={() => props.setStep(0)}>
       <HomeIcon></HomeIcon>
     </Button>
@@ -261,6 +347,29 @@ const Body = props => {
     setStep(3);
   };
 
+  const getSintomas = (symtoms) => {
+    let list = [];
+    symtoms['chest'].map(item => list.push(item));
+    symtoms['ears'].map(item => list.push(item));
+    symtoms['eyes'].map(item => list.push(item));
+    symtoms['foot'].map(item => list.push(item));
+    symtoms['foreArm'].map(item => list.push(item));
+    symtoms['hands'].map(item => list.push(item));
+    symtoms['head'].map(item => list.push(item));
+    symtoms['knees'].map(item => list.push(item));
+    symtoms['lowerAbdomen'].map(item => list.push(item));
+    symtoms['lowerLeg'].map(item => list.push(item));
+    symtoms['midAbdomen'].map(item => list.push(item));
+    symtoms['neck'].map(item => list.push(item));
+    symtoms['nose'].map(item => list.push(item));
+    symtoms['oralCavity'].map(item => list.push(item));
+    symtoms['sexualOrgans'].map(item => list.push(item));
+    symtoms['thighs'].map(item => list.push(item));
+    symtoms['upperAbdomen'].map(item => list.push(item));
+    symtoms['upperArm'].map(item => list.push(item));
+    return list;
+  }
+
   return (
     <Container maxWidth={false}>
       <SelectorMenu
@@ -289,9 +398,11 @@ const Body = props => {
                 controls={controls}
                 classes={props.classes}
                 setStep={setStep}
+                symptoms={getSintomas(symptoms)}
+                setSelectedSymptoms={setSelectedSymptoms}
               />
             )}
-            {step === 3 && <DetailStep classes={props.classes} setStep={setStep} />}
+            {step === 3 && <DetailStep classes={props.classes} selectedSymptoms={selectedSymptoms} setStep={setStep} />}
             {step === 4 && <ResultsStep classes={props.classes} setStep={setStep} />}
           </Card>
 
