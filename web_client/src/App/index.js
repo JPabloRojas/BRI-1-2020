@@ -66,8 +66,8 @@ theme.typography.h5 = {
 
 const App = (props) => (
   <ThemeProvider theme={theme}>
-    <PrivateRoute exact path={Paths.HOME} component={Home} />
-    <PrivateRoute exact path={Paths.BODY} component={Body} />
+    {/* <PrivateRoute exact path={Paths.HOME} component={Home} /> */}
+    <PrivateRoute exact path={Paths.HOME} component={Body} />
     {/* Maintainers */}
   </ThemeProvider>
 );

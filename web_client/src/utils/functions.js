@@ -558,6 +558,7 @@ export const formatDate = date =>
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'UTC',
   });
 
 export const onChangeFnc = (onChange, event, date, withModule) => {

@@ -25,8 +25,8 @@ import ReactStars from 'react-rating-stars-component';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
-import Happy from "../../commons/assets/emotion.png";
-import Sad from "../../commons/assets/hurt.png";
+import Happy from '../../commons/assets/emotion.png';
+import Sad from '../../commons/assets/hurt.png';
 
 // Project
 import { selectState, actionProps } from 'utils/reduxActions';
@@ -55,7 +55,7 @@ import {
 } from '@material-ui/core';
 import Male from 'commons/components/Bodys/Male';
 import { bodyActions } from './reducer';
-import { truthty, formatDate } from 'utils/functions';
+import { truthty, formatDate, falsy } from 'utils/functions';
 
 const SelectorMenu = props => (
   <Popover
@@ -120,55 +120,19 @@ const InitialInformationStep = props => (
     <Grid item xs={12}>
       <Grid container xs={12} md={12}>
         <Grid item xs={6} lg={6}>
-          <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic"}}>
-              ¡Conozcamonos un poco!
-          </Typography>
+          <Typography style={{ fontSize: 20, fontWeight: 400, fontStyle: 'italic' }}>¡Conozcamonos un poco!</Typography>
         </Grid>
         <Grid item xs={6} lg={6}>
-        <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic"}}>
+          <Typography style={{ fontSize: 20, fontWeight: 400, fontStyle: 'italic' }}>
             ¿Por dónde buscamos al médico indicado?
-        </Typography>
+          </Typography>
         </Grid>
       </Grid>
-        <Grid container xs={12} md={12}
-            direction="row"
-            alignItems="center"
-            style={{ marginTop: "20px"}}
-            spacing={1}>
-            <Grid item xs={3} lg={4} style={{maxHeight: '100%'}}>
-            <Edad></Edad> 
-            </Grid>
-            <Grid item xs={3} lg={2} style={{maxHeight: '100%'}}>
-            <Gender></Gender>
-            </Grid>
-            <Grid item xs={4} lg={4} style={{maxHeight: '100%'}}>
-                <FormControl style={{width:"95%"}}>
-                  <InputLabel htmlFor="input-with-icon-adornment">Ubicación</InputLabel>
-                  <Input
-                    id="ubication"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <RoomIcon />
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-            </Grid>
-            <Grid item xs={2} lg={2} style={{maxHeight: '100%'}}>
-              <FormControl>
-                <InputLabel htmlFor="input-with-icon-adornment">Número</InputLabel>
-                <Input
-                  id="door"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <MeetingRoomIcon />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
+      <Grid container xs={12} md={12} direction='row' alignItems='center' style={{ marginTop: '20px' }} spacing={1}>
+        <Grid item xs={3} lg={4} style={{ maxHeight: '100%' }}>
+          <Edad></Edad>
         </Grid>
-        <Grid item xs={4} lg={2} style={{ maxHeight: '100%' }}>
+        <Grid item xs={3} lg={2} style={{ maxHeight: '100%' }}>
           <Gender></Gender>
         </Grid>
         <Grid item xs={4} lg={4} style={{ maxHeight: '100%' }}>
@@ -184,7 +148,7 @@ const InitialInformationStep = props => (
             />
           </FormControl>
         </Grid>
-        <Grid item xs={4} lg={2} style={{ maxHeight: '100%' }}>
+        <Grid item xs={2} lg={2} style={{ maxHeight: '100%' }}>
           <FormControl>
             <InputLabel htmlFor='input-with-icon-adornment'>Número</InputLabel>
             <Input
@@ -218,8 +182,8 @@ const InitialInformationStep = props => (
 const BodyStep = props => (
   <Grid container spacing={3} className={props.classes.container}>
     <Grid item xs={6}>
-      <Typography style={{fontSize: 20, fontWeight:400, fontStyle:"italic", textAlign: "center"}}>
-          Identifiquemos tus síntomas
+      <Typography style={{ fontSize: 20, fontWeight: 400, fontStyle: 'italic', textAlign: 'center' }}>
+        Identifiquemos tus síntomas
       </Typography>
     </Grid>
     <Grid item xs={6}></Grid>
@@ -230,25 +194,22 @@ const BodyStep = props => (
       <Grid container spacing={3} className={props.classes.container}>
         <Grid item xs={12}>
           <Autocomplete
-            id="tags-outlined"
+            id='tags-outlined'
             options={props.symptoms}
-            getOptionLabel={(option) => option}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Busca tus síntomas"
-              />
-            )}
+            getOptionLabel={option => option}
+            renderInput={params => <TextField {...params} variant='outlined' label='Busca tus síntomas' />}
+            onChange={(event, newValue) => {
+              truthty(newValue) && props.setSelectedSymptoms([...props.selectedSymptoms, newValue]);
+            }}
           />
-          <Autocomplete
-            id="combo-box-demo"
+          {/* <Autocomplete
+            id='combo-box-demo'
             options={props.symptoms}
-            getOptionLabel={(option) => option}
+            getOptionLabel={option => option}
             style={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Busca tus síntomas" variant="outlined" value=""/>}
-            onClick={(e) => props.setSelectedSymptoms([...props.selectedSymptoms, e.target.value])}
-          />
+            renderInput={params => <TextField {...params} label='Busca tus síntomas' variant='outlined' value='' />}
+            onClick={e => props.setSelectedSymptoms([...props.selectedSymptoms, e.target.value])}
+          /> */}
         </Grid>
         <Grid item xs={12}>
           {props.selectedSymptoms.map(item => (
@@ -262,12 +223,17 @@ const BodyStep = props => (
       <HomeIcon></HomeIcon>
     </Button>
 
-    <Button color='primary' variant='contained' className={props.classes.nextButton} onClick={props.saveSymptoms} disabled={props.selectedSymptoms.length === 0}>
+    <Button
+      color='primary'
+      variant='contained'
+      className={props.classes.nextButton}
+      onClick={props.saveSymptoms}
+      disabled={props.selectedSymptoms.length === 0}
+    >
       Siguiente
     </Button>
   </Grid>
 );
-
 
 const marks = [
   {
@@ -293,26 +259,25 @@ const marks = [
 ];
 
 const DetailStep = props => (
-  <Grid container spacing={3} className={props.classes.container} style={{marginBottom:30}}>
+  <Grid container spacing={3} className={props.classes.container} style={{ marginBottom: 30 }}>
     <Grid item xs={12}>
-      <Typography style={{fontSize: 26, fontWeight:400, fontStyle:"italic"}}>
-          ¿Cuál es la intensidad de tus síntomas?
+      <Typography style={{ fontSize: 26, fontWeight: 400, fontStyle: 'italic' }}>
+        ¿Cuál es la intensidad de tus síntomas?
       </Typography>
 
-      {props.selectedSymptoms.map(item => 
-        <Grid container xs={12} style={{marginTop:20}}>
-          <Grid item xs={6} style={{fontStyle:"normal", fontSize:22, textAlign: "center", marginTop:10}}>
+      {props.selectedSymptoms.map(item => (
+        <Grid container xs={12} style={{ marginTop: 20 }}>
+          <Grid item xs={6} style={{ fontStyle: 'normal', fontSize: 22, textAlign: 'center', marginTop: 10 }}>
             {item}
           </Grid>
-          <Grid item xs={1} style={{textAlign: "center"}}>
-            <img src={Happy} alt="logo" className="rounded mx-auto d-block" style={{ height: "50px"}}/> 
+          <Grid item xs={1} style={{ textAlign: 'center' }}>
+            <img src={Happy} alt='logo' className='rounded mx-auto d-block' style={{ height: '50px' }} />
           </Grid>
-          <Grid item xs={4} style={{textAlign: "center", marginTop:10}}>
-           
+          <Grid item xs={4} style={{ textAlign: 'center', marginTop: 10 }}>
             <Slider
               defaultValue={3}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
+              aria-labelledby='discrete-slider'
+              valueLabelDisplay='auto'
               step={1}
               marks={marks}
               min={1}
@@ -320,16 +285,12 @@ const DetailStep = props => (
               width={100}
             />
           </Grid>
-          <Grid item xs={1} style={{textAlign: "center"}}>
-            <img src={Sad} alt="logo" className="rounded mx-auto d-block" style={{ height: "50px"}}/> 
+          <Grid item xs={1} style={{ textAlign: 'center' }}>
+            <img src={Sad} alt='logo' className='rounded mx-auto d-block' style={{ height: '50px' }} />
           </Grid>
-
-        </Grid>)}
-
-      
-
+        </Grid>
+      ))}
     </Grid>
-
 
     <Button color='primary' variant='contained' className={props.classes.home} onClick={() => props.setStep(0)}>
       <HomeIcon></HomeIcon>
@@ -351,48 +312,63 @@ const ResultsStep = props => {
       </Grid>
       <Grid item xs={12}>
         <List>
-          {props.results.map(item => (
-            <ListItem divider>
-              <ListItemAvatar>
-                <img src={item.info.photo.small_url} />
-              </ListItemAvatar>
-              <ListItemText
-                primary={
-                  <Grid container spacing={1} style={{ marginLeft: 20 }}>
-                    <Grid item xs={9}>
-                      <Typography style={{ fontWeight: 400 }}>{item.info.full_name}</Typography>
-                      <Typography color='primary' style={{ fontWeight: 700 }}>
-                        <AssignmentIndIcon style={{ position: 'relative', top: '5px', marginRight: '2px' }} />{' '}
-                        {item.info._embedded.specializations._items.map(item => item.name).join(' - ')}
-                      </Typography>
-                      <Typography style={{ fontWeight: 500 }}>
-                        <LocationOnIcon style={{ position: 'relative', top: '5px', marginRight: '2px' }} />{' '}
-                        {item.info.city_name}
-                      </Typography>
+          {props.results
+            .sort((a, b) => b.info.opinion_stats.total - a.info.opinion_stats.total)
+            .map(item => (
+              <ListItem divider>
+                <ListItemAvatar>
+                  <img src={item.info.photo.small_url} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Grid container spacing={1} style={{ marginLeft: 20 }}>
+                      <Grid item xs={9}>
+                        <Typography style={{ fontWeight: 400 }}>{item.info.full_name}</Typography>
+                        <Typography color='primary' style={{ fontWeight: 700 }}>
+                          <AssignmentIndIcon style={{ position: 'relative', top: '5px', marginRight: '2px' }} />{' '}
+                          {item.info._embedded.specializations._items.map(item => item.name).join(' - ')}
+                        </Typography>
+                        <Typography style={{ fontWeight: 500 }}>
+                          <LocationOnIcon style={{ position: 'relative', top: '5px', marginRight: '2px' }} />{' '}
+                          {item.info.city_name}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={3}>
+                        <Grid container spacing={1} justify='center'>
+                          <ReactStars count={5} edit={false} value={item.info.stars} size={24} activeColor='#ffd700' />
+                          <Grid item xs={12}>
+                            <Typography style={{ textAlign: 'center' }}>
+                              {item.info.opinion_stats.total} opiniones
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={3}>
-                      <ReactStars count={5} edit={false} value={item.info.stars} size={24} activeColor='#ffd700' />
+                  }
+                  secondary={
+                    <Grid container spacing={1} style={{ marginLeft: 20 }}>
+                      <Grid item xs={12}>
+                        <Typography color='primary' style={{ fontWeight: 700 }}>
+                          <EventAvailableIcon style={{ position: 'relative', top: '5px', marginRight: '2px' }} /> Hora
+                          más cercana disponible
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Button
+                          variant='contained'
+                          color='primary'
+                          onClick={() => window.open(item.dates._nearest.link)}
+                        >
+                          {`${formatDate(new Date(item.dates._nearest.start))} - ${new Date(
+                            item.dates._nearest.start,
+                          ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} hrs`}
+                        </Button>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                }
-                secondary={
-                  <Grid container spacing={1} style={{ marginLeft: 20 }}>
-                    <Grid item xs={12}>
-                      <Typography color='primary' style={{ fontWeight: 700 }}>
-                        <EventAvailableIcon style={{ position: 'relative', top: '5px', marginRight: '2px' }} /> Hora más
-                        cercana disponible
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button variant='contained' color='primary' onClick={() => window.open(item.dates._nearest.link)}>
-                        {formatDate(new Date(item.dates._nearest.start))}
-                      </Button>
-                    </Grid>
-                  </Grid>
-                }
-              />
-            </ListItem>
-          ))}
+                  }
+                />
+              </ListItem>
+            ))}
         </List>
       </Grid>
     </Grid>
@@ -413,8 +389,7 @@ const Body = props => {
 
   useEffect(() => {
     if (step === 4) {
-      // actions.getResults(selectedSymptoms.join(' '));
-      actions.getResults('dolor de cabeza');
+      actions.getResults(selectedSymptoms.join(' '));
     }
   }, [step]);
 
@@ -436,7 +411,7 @@ const Body = props => {
     setStep(3);
   };
 
-  const getSintomas = (symtoms) => {
+  const getSintomas = symtoms => {
     let list = [];
     symtoms['chest'].map(item => list.push(item));
     symtoms['ears'].map(item => list.push(item));
@@ -457,7 +432,18 @@ const Body = props => {
     symtoms['upperAbdomen'].map(item => list.push(item));
     symtoms['upperArm'].map(item => list.push(item));
     return list;
-  }
+  };
+
+  const shuffle = arr => {
+    const newArr = arr.slice();
+    for (let i = newArr.length - 1; i > 0; i--) {
+      const rand = Math.floor(Math.random() * (i + 1));
+      [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
+    }
+    return newArr;
+  };
+
+  const shuffleResults = shuffle(results).slice(0, 5);
 
   return (
     <Container maxWidth={false}>
@@ -495,11 +481,8 @@ const Body = props => {
                 setSelectedSymptoms={setSelectedSymptoms}
               />
             )}
-            {step === 3 && <DetailStep classes={props.classes} setStep={setStep} />}
-            {step === 4 && <ResultsStep classes={props.classes} setStep={setStep} results={results} />}
-            {step === 3 && <DetailStep classes={props.classes} selectedSymptoms={selectedSymptoms} setStep={setStep} />}
-            {step === 4 && <ResultsStep classes={props.classes} setStep={setStep} />}
-          
+            {step === 3 && <DetailStep classes={props.classes} setStep={setStep} selectedSymptoms={selectedSymptoms} />}
+            {step === 4 && <ResultsStep classes={props.classes} setStep={setStep} results={shuffleResults} />}
           </Card>
 
           {/* STEPS */}
